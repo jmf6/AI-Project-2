@@ -3,16 +3,22 @@
 #include <string>
 class Card{
     public:
-        Card(string color, string action, int value);
+	Card(string color, int value);
+        Card(string color, int value, string action);
         void setColor(string color);
+	void setIsAction(bool isAction);
         void setAction(string action);
         void setValue(int value);
         string getColor();
         string getAction();
         int getValue();
+	bool getIsAction();
 
     private:
         string color;
-        string action;
+        bool isAction;
+	string action;
         int value;
 }
+
+#endif
