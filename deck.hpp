@@ -7,6 +7,10 @@ class Deck{
 	    Deck();
 	    Deck(vector<Card> &aDeck);
 	    Deck makeStartingDeck();
+	    vector<Card> getDeck();
+	    int getTop();
+	    void setDeck(vector<Card> &aDeck);
+	    void setTop(int top);
 
 	private:
 	    vector<string> colors("red", "yellow", "blue", "green");
