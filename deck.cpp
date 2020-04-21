@@ -47,6 +47,8 @@ Deck Deck::makeStartingDeck(){
 	deck.push_back(c);
         deck.push_back(c);
     }
+    
+    setTopOfDeck(deck.size() - 1);
 
     return deck;
 }
