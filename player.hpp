@@ -1,5 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
+#include "card.hpp"
+#include <vector>
 
 class Player{                              // Base Player class
     private:                                // No one may access this other than the player
@@ -8,9 +10,9 @@ class Player{                              // Base Player class
     
     public:
         Player();
-        virtual int play();                 // override-able behavior
+        //virtual int play();                 // override-able behavior
         void addToHand(Card c);
-        vector<Card> hand;
+	std::vector<Card> hand;
 
 };
 #endif

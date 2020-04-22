@@ -1,16 +1,19 @@
 #include "game.hpp"
 #include "deck.hpp"
 #include "card.hpp"
+#include "player.hpp"
 
 Game::Game(){
-    drawPile = makeStartingDeck();
-    discardPile = new Deck();
+    p1 = Player();
+    p2 = Player();
+    drawPile = drawPile.makeStartingDeck();
+    discardPile = Deck();
 
-    drawPile.theDeck.shuffle();
+    //drawPile.theDeck.shuffle();
 
     dealCards();
 
-    discardPile.push_back(drawCard());
+    discardPile.theDeck.push_back(drawCard());
 }       
 
 void Game::dealCards(){
@@ -23,7 +26,9 @@ void Game::dealCards(){
 }       
 
 Card Game::drawCard(){
-    Card c = drawPile.getTop();
+    Card c = drawPile.theDeck.at(drawPile.getTop());
     drawPile.theDeck.pop_back();
-    drawPile.setTop(drawPile.theDeck.size() - 1);
+    drawPile.setTopOfDeck(drawPile.theDeck.size() - 1);
+
+    return c;
 }

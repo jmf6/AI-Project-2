@@ -1,20 +1,20 @@
 #include "card.hpp"
 
-Card::Card(string color, int value){
+Card::Card(std::string color, int value){
 	setColor(color);
 	setValue(value);
 	setIsAction(false);
-	setAction(null);
+	setAction("none");
 }
 
-Card::Card(string color, int value, string action){
+Card::Card(std::string color, int value, std::string action){
 	setColor(color);
 	setValue(value);
 	setIsAction(true);
 	setAction(action);
 }
 
-void Card::setColor(string color){
+void Card::setColor(std::string color){
 	this->color = color;
 }
 
@@ -22,7 +22,7 @@ void Card::setIsAction(bool isAction){
 	this->isAction = isAction;
 }
 
-void Card::setAction(string action){
+void Card::setAction(std::string action){
 	this->action = action;
 }
 
@@ -30,11 +30,11 @@ void Card::setValue(int value){
 	this->value = value;
 }
 
-string Card::getColor(){
+std::string Card::getColor(){
 	return this->color;
 }
 
-string Card::getAction(){
+std::string Card::getAction(){
 	return this->action;
 }
 

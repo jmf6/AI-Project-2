@@ -3,22 +3,22 @@
 #include <string>
 class Card{
     public:
-	Card(string color, int value);
-        Card(string color, int value, string action);
-        void setColor(string color);
+	Card(std::string color, int value);
+        Card(std::string color, int value, std::string action);
+        void setColor(std::string color);
 	void setIsAction(bool isAction);
-        void setAction(string action);
+        void setAction(std::string action);
         void setValue(int value);
-        string getColor();
-        string getAction();
+	std::string getColor();
+	std::string getAction();
         int getValue();
 	bool getIsAction();
 
     private:
-        string color;
+	std::string color;
         bool isAction;
-	string action;
+	std::string action;
         int value;
-}
+};
 
 #endif

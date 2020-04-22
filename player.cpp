@@ -1,8 +1,6 @@
 #include "player.hpp"
 
-Player::Player(){
-    h = new Hand();
-}
+Player::Player(){}
 
 void Player::addToHand(Card c){
     hand.push_back(c);

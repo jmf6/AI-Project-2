@@ -7,12 +7,12 @@
 using namespace std;
 
 int main(){
-    Game g = new Game();
+    Game g = Game();
 
-    for(int i = 0; i < p1.hand.size(); i++){
-        cout << hand.at(i).getColor() << " " << hand.at(i).getValue();
-        if(hand.at(i).isAction() == true){
-            cout << " " << hand.at(i).getAction() << endl;
+    for(int i = 0; i < g.p1.hand.size(); i++){
+        cout << g.p1.hand.at(i).getColor() << " " << g.p1.hand.at(i).getValue();
+        if(g.p1.hand.at(i).getIsAction() == true){
+            cout << " " << g.p1.hand.at(i).getAction() << endl;
         }
         else{
             cout << endl;
