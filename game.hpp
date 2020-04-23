@@ -10,11 +10,13 @@ class Game{
         Game();
         void dealCards();
 	Card drawCard();
+	Card getDiscard();
         Player p1; //human player
         Player p2; //AI
+	Deck drawPile;
 
     private:
-        Deck drawPile;
+        //Deck drawPile;
         Deck discardPile;
         
 };

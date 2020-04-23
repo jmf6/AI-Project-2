@@ -1,15 +1,18 @@
 #include "game.hpp"
-#include "deck.hpp"
-#include "card.hpp"
-#include "player.hpp"
-
+#include <algorithm>
+#include <iostream>
 Game::Game(){
     p1 = Player();
     p2 = Player();
     drawPile = drawPile.makeStartingDeck();
     discardPile = Deck();
+   
+    srand(time(NULL));
+    int shuffle = std::rand() % 15 + 10;
 
-    //drawPile.theDeck.shuffle();
+    for(int i = 0; i < shuffle; i++){
+    	std::random_shuffle(drawPile.theDeck.begin(), drawPile.theDeck.end());
+    }
 
     dealCards();
 
@@ -31,4 +34,8 @@ Card Game::drawCard(){
     drawPile.setTopOfDeck(drawPile.theDeck.size() - 1);
 
     return c;
+}
+
+Card Game::getDiscard(){
+    return discardPile.theDeck.at(discardPile.theDeck.size() - 1);
 }

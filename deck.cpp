@@ -1,5 +1,5 @@
 #include "deck.hpp"
-
+#include <iostream>
 Deck::Deck(){
     setTopOfDeck(0);
 }
@@ -30,16 +30,19 @@ Deck Deck::makeStartingDeck(){
             Card c = Card(colors.at(j), i + 1);
             deck.push_back(c);
             deck.push_back(c);
-            c = Card(colors.at(j), 20, "reverse");
-            deck.push_back(c);
-            deck.push_back(c);
-            c = Card(colors.at(j), 20, "skip");
-            deck.push_back(c);
-            deck.push_back(c);
-            c = Card(colors.at(j), 20, "draw2");
-            deck.push_back(c);
-            deck.push_back(c);
         }
+    }
+
+    for(int i = 0; i < 4; i++){
+	Card c = Card(colors.at(i), 20, "reverse");
+	deck.push_back(c);
+	deck.push_back(c);
+	c = Card(colors.at(i), 20, "skip");
+	deck.push_back(c);
+	deck.push_back(c);
+	c = Card(colors.at(i), 20, "draw2");
+	deck.push_back(c);
+	deck.push_back(c);
     }
 
     for(int i = 0; i < 4; i++){
@@ -49,7 +52,8 @@ Deck Deck::makeStartingDeck(){
         c = Card("wild", 50, "draw4");
         deck.push_back(c);
     }
-    
+
     Deck d = Deck(deck, deck.size() - 1);
+    
     return d;
 }

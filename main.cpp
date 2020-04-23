@@ -18,5 +18,7 @@ int main(){
             cout << endl;
         }
     }
+
+    cout << "top of discard pile: " << g.getDiscard().getColor() << " " << g.getDiscard().getValue() << endl;
     return 0;
 }  
