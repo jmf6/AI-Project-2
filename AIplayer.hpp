@@ -6,7 +6,7 @@
 class AIplayer : public Player{
     public:
         AIplayer();
-        int play() override; //put all the AI magic here
+        Card play() override; //put all the AI magic here
 };
 
 #endif
