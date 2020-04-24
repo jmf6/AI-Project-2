@@ -5,21 +5,23 @@
 #include "card.hpp"
 #include "deck.hpp"
 #include "player.hpp"
+#include "human.hpp"
+#include "AIplayer.hpp"
 
 class Game{
     public:
         Game();
         void dealCards();
-	Card drawCard();
-	Card getDiscard();
+        Card drawCard();
+        Card getDiscard();
         Player p1; //human player
         Player p2; //AI
-	Deck drawPile;
+        Deck drawPile;
 
     private:
-        //Deck drawPile;
+        //Deck drawPile; I don't know why I did this and which draw pile needs to stay but I'll figure it out
         Deck discardPile;
-        
+
 };
 
 #endif
