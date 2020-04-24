@@ -1,5 +1,8 @@
 #include "deck.hpp"
 #include <iostream>
+
+std::vector<std::string> Deck::colors  = {"red", "yellow", "blue", "green"};
+
 Deck::Deck(){
     setTopOfDeck(0);
 }

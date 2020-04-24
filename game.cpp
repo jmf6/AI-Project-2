@@ -4,7 +4,7 @@
 Game::Game(){
     p1 = Player();
     p2 = Player();
-    drawPile = drawPile.makeStartingDeck();
+    drawPile = Deck::makeStartingDeck();
     discardPile = Deck();
    
     srand(time(NULL));

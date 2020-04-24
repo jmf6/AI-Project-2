@@ -1,3 +1,4 @@
+#pragma once
 #ifndef DECK_HPP
 #define DECK_HPP
 #include <vector>
@@ -9,13 +10,13 @@ class Deck{
 	    Deck(std::vector<Card> &aDeck, int top);
 	    std::vector<Card> getDeck();
 	    int getTop();
-	    Deck makeStartingDeck();
+	    static Deck makeStartingDeck();
 	    void setDeck(std::vector<Card> &aDeck);
 	    void setTopOfDeck(int top);
 	    std::vector<Card> theDeck;
 
 	private:
-	    std::vector<std::string> colors = {"red", "yellow", "blue", "green"};
+	    static std::vector<std::string> colors;
 	    int topOfDeck;
 };
 
