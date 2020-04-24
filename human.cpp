@@ -12,7 +12,9 @@ void HumanPlayer::setName(){
     sName(t);
 }
 
-int HumanPlayer::play(){
+Card HumanPlayer::play(){
+    std::cout << "entering play function" << std::endl;
+
     int card;
     std::cout << "The current cards in your hand are: " << std::endl;
 
@@ -20,10 +22,10 @@ int HumanPlayer::play(){
 
     std::cout << "Enter the number of the card you wish to play: ";
     std::cin >> card;
-
+    Card c = hand.at(card - 1);
     //check here for valid move using hand.at(card - 1)
 
-    return card; //not sure about this yet
+    return c;
 }
 
 void HumanPlayer::printCards(){
