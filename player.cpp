@@ -1,5 +1,5 @@
 #include "player.hpp"
-
+  
 Player::Player(){
     name = "N/A";
     setNumCards();
@@ -26,6 +26,6 @@ std::string Player::getName(){
     return name;
 }
 
-int Player::play(){
-	return int();
+Card Player::play(){
+        return Card("none", -3);
 }
