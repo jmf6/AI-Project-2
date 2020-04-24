@@ -8,7 +8,7 @@
 class HumanPlayer : public Player{
     public:
         HumanPlayer();
-        int play();
+        Card play() override;
     private:
         void setName();
         void printCards();
