@@ -1,5 +1,7 @@
 #include "card.hpp"
 
+Card Card::turnOver = Card("red", -100);
+
 Card::Card(std::string color, int value){
 	setColor(color);
 	setValue(value);

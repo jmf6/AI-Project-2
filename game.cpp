@@ -8,7 +8,7 @@ Game::Game(){
     discardPile = Deck();
    
     srand(time(NULL));
-    int shuffle = std::rand() % 15 + 10;
+    int shuffle = std::rand() % 15 + 10; // 10 - 24 times
 
     for(int i = 0; i < shuffle; i++){
     	std::random_shuffle(drawPile.theDeck.begin(), drawPile.theDeck.end());

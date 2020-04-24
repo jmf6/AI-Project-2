@@ -2,6 +2,7 @@
 #include "deck.hpp"
 #include "game.hpp"
 #include "player.hpp"
+#include "Rules.hpp"
 #include <iostream>
 
 using namespace std;
@@ -20,5 +21,8 @@ int main(){
     }
 
     cout << "top of discard pile: " << g.getDiscard().getColor() << " " << g.getDiscard().getValue() << endl;
+    cout << Card::turnOver.getValue() << endl;
+    auto mrule = Rules::rules.at(0);
+    cout << mrule.test() << endl;
     return 0;
 }  

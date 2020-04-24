@@ -14,6 +14,7 @@ class Card{
 	std::string getAction();
         int getValue();
 	bool getIsAction();
+        static Card turnOver; // This is a special card that indicates the player is finished with their turn and is ready to let the next player go.
 
     private:
 	std::string color;
