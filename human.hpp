@@ -7,10 +7,11 @@
 
 class HumanPlayer : public Player{
     public:
-	HumanPlayer();
-        int play(); 
+        HumanPlayer();
+        int play();
     private:
-	void setName();
+        void setName();
+        void printCards();
 };
 
 #endif
