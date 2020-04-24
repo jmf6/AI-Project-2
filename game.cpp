@@ -2,31 +2,31 @@
 #include <algorithm>
 #include <iostream>
 Game::Game(){
-    p1 = Player();
-    p2 = Player();
+    p1 = HumanPlayer();
+    p2 = AIplayer();
     drawPile = Deck::makeStartingDeck();
     discardPile = Deck();
-   
+
     srand(time(NULL));
     int shuffle = std::rand() % 15 + 10; // 10 - 24 times
 
     for(int i = 0; i < shuffle; i++){
-    	std::random_shuffle(drawPile.theDeck.begin(), drawPile.theDeck.end());
+        std::random_shuffle(drawPile.theDeck.begin(), drawPile.theDeck.end());
     }
 
     dealCards();
 
     discardPile.theDeck.push_back(drawCard());
-}       
+}
 
 void Game::dealCards(){
     for(int i = 0; i < 7; i++){
         Card c = drawCard();
-        p1.addToHand(c);
-        c = drawCard();
         p2.addToHand(c);
+        c = drawCard();
+        p1.addToHand(c);
     }
-}       
+}
 
 Card Game::drawCard(){
     Card c = drawPile.theDeck.at(drawPile.getTop());
