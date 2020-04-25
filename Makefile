@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -fconcepts -fpermissive
+CXXFLAGS = -std=c++17 -fconcepts -fpermissive
 
 main: 
 	$(CXX) $(CXXFLAGS) *.cpp -o $@ 
