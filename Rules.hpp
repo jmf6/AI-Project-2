@@ -2,7 +2,9 @@
 #ifndef RULES_HPP
 #define RULES_HPP
 #include <functional>
+#include <algorithm>
 #include <vector>
+#include "card.hpp"
 // This struct acts as an organizer for the rules defined for the game. C++14 required for this object.
 struct Rules {
     /* 
@@ -17,8 +19,8 @@ struct Rules {
 
     */
     struct Rule {
-        std::function<bool()> test;
-        std::function<void()> action;
+        std::function<bool(const Card& discard, const std::vector<Card>& deck)> test;
+        std::function<Card(const Card& discard, const std::vector<Card>& deck)> action;
         Rule(auto _tst, auto _act) : test(_tst), action(_act) { };
     };
     static std::vector<Rule> rules;

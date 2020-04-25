@@ -4,13 +4,14 @@
 #include "player.hpp"
 #include "Rules.hpp"
 #include "human.hpp"
+#include "AIplayer.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main(){
     char choice = 'y';
-    int card;
+    // int card;
     do{
         cout << "Welcome to UNO!" << endl;
         Game g = Game(); //initialize game
@@ -27,4 +28,5 @@ int main(){
     }while(choice != 'n' && choice != 'N');
 
     return 0;
+   
 }

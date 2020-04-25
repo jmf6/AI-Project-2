@@ -1,10 +1,8 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -fconcepts
+CXXFLAGS = -std=c++17 -Wall -fconcepts -fpermissive
 
-OBJECTS = card.o deck.o player.o game.o Rules.o
-
-main: $(OBJECTS) main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^
+main: 
+	$(CXX) $(CXXFLAGS) *.cpp -o $@ 
 
 clean:
 	$(RM) *.o *.gch core main

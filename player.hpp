@@ -18,7 +18,7 @@ class Player{                              // Base Player class
    
     protected:                              // protected means inherited classes can access this data, as opposed to private
         void sName(std::string name);
-	bool checkMove(Card move, Card discard);
+	    bool checkMove(Card move, Card discard);
     public:
         Player();
         virtual Card play(Card discard);                 // override-able behavior

@@ -26,6 +26,11 @@ int HumanPlayer::getCurrentCard(){
 }
 
 Card HumanPlayer::play(Card discard){
+    
+    auto rule = Rules::rules.at(0);
+    if(!rule.test(discard, hand)) {
+        return Card::turnOver;
+    }
     chooseCard();
        
     Card c = hand.at(getCurrentCard());
@@ -47,7 +52,7 @@ Card HumanPlayer::play(Card discard){
 
 void HumanPlayer::printCards(){
     std::cout << "The current cards in your hand are: " << std::endl;
-    for(int i = 0; i < hand.size(); i++){
+    for(size_t i = 0; i < hand.size(); i++){
         if(hand.at(i).getIsAction() == false){
             std::cout << "Card #" << i + 1 << ": " << hand.at(i).getColor() << " " << hand.at(i).getValue() << std::endl;
         }

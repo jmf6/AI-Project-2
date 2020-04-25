@@ -1,11 +1,19 @@
-/*#include "AIplayer.hpp"
+#include "AIplayer.hpp"
   
 AIplayer::AIplayer(){
     sName("CPU 1");
 }
 
-Card AIplayer::play(){
+Card AIplayer::play(Card discard){
     //do AI shit here
-
-    return Card("none", -1); //just until AI shit is done
-}*/
+    Card c = Card::turnOver;
+    for(auto rule : Rules::rules) {
+        if(rule.test(discard, hand)) {
+            c = rule.action(discard, hand);
+        }
+    }
+    if (!checkMove(c, discard))  {
+        c = Card::turnOver;
+    }
+    return c; //just until AI shit is done
+}

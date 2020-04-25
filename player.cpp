@@ -59,7 +59,7 @@ bool Player::checkAction(Card move, Card discard){
 
 //checks to see if attempted draw four move is valid
 bool Player::checkDrawFour(Card discard){
-    for(int i = 0; i < hand.size(); i++){
+    for(size_t i = 0; i < hand.size(); i++){
         if(hand.at(i).getColor() == discard.getColor()){
             return false;
         }
