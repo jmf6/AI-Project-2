@@ -1,5 +1,5 @@
 #include "human.hpp"
-  
+
 HumanPlayer::HumanPlayer(){
     setName();
 }
@@ -9,7 +9,7 @@ void HumanPlayer::setName(){
     std::string t;
     std::cin >> t;
     std::cout << "Thanks, " << t << "!" << std::endl;
-    sName(t);
+sName(t);
 }
 
 void HumanPlayer::chooseCard(){
@@ -17,8 +17,8 @@ void HumanPlayer::chooseCard(){
     printCards();
     std::cout << "Enter the number of the card you wish to play: ";
     std::cin >> card;
-
     this->currentCard = card;
+
 }
 
 int HumanPlayer::getCurrentCard(){
@@ -26,33 +26,78 @@ int HumanPlayer::getCurrentCard(){
 }
 
 Card HumanPlayer::play(Card discard){
-    
-    auto rule = Rules::rules.at(0);
-    if(!rule.test(discard, hand)) {
-        return Card::turnOver;
+    if(checkMovePossible(discard)){
+	    chooseCard();
     }
-    chooseCard();
-       
-    Card c = hand.at(getCurrentCard());
+    else{
+	    return Card::turnOver;
+    }
+    while(getCurrentCard() - 1 < 0 || getCurrentCard() - 1 > hand.size() - 1){
+        std::cout << "Invalid choice" << std::endl;
+        chooseCard();
+    }
+
+    Card c = hand.at(getCurrentCard() - 1);
 
     if(checkMove(c, discard)){
-	hand.erase(hand.begin() + getCurrentCard());
+        hand.erase(hand.begin() + getCurrentCard() - 1);
     }
 
     else{
-	do{
-	    std::cout << "Invalid move" << std::endl;
-	    play(discard);
-	}while(!checkMove(c,discard));
+        do{
+            std::cout << "Invalid move" << std::endl;
+            play(discard);
+        }while(!checkMove(c,discard));
     }
 
+    if(c.getColor() == "wild"){
+        char color;
+        std::string select;
+        std::cout << "Which color would you like to change to? (r = red, b = blue, g = green, y = yellow) ";
+        while(color != 'r' && color != 'b' && color != 'g' && color != 'y'){
+           std::cout << "Invalid choice, r = red, b = blue, g = green, y = yellow";
+        }
+
+        switch(color){
+            case 'r':
+                    select = "red";
+                    break;
+            case 'b':
+                    select = "blue";
+                    break;
+            case 'g':
+                    select = "green";
+                    break;
+            case 'y':
+                    select = "yellow";
+                    break;
+        }
+
+        c.setColor(select);
+
+    }
 
     return c;
 }
 
+bool HumanPlayer::checkMovePossible(Card discard){
+    for(int i = 0; i < hand.size(); i++){
+        if(discard.getValue() <= 9 && (hand.at(i).getValue() == discard.getValue())){
+            return true;
+        }
+        else if(discard.getIsAction() && (hand.at(i).getAction() == discard.getAction())){
+            return true;
+        }
+        else if(discard.getColor() != "wild" && (hand.at(i).getColor() == discard.getColor())){
+            return true;
+        }
+    }
+    return false;
+}
+
 void HumanPlayer::printCards(){
     std::cout << "The current cards in your hand are: " << std::endl;
-    for(size_t i = 0; i < hand.size(); i++){
+    for(int i = 0; i < hand.size(); i++){
         if(hand.at(i).getIsAction() == false){
             std::cout << "Card #" << i + 1 << ": " << hand.at(i).getColor() << " " << hand.at(i).getValue() << std::endl;
         }

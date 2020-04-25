@@ -34,24 +34,18 @@ std::vector<Rules::Rule> Rules::rules = {
             } else {
                 std::array<int, 4> colorCount;
                 for(auto c : deck) {
-                    switch(c.getColor()) {
-                        case "red": {
-                            colorCount.at(0)++;
-                            break;
-                        }
-                        case "green": {
-                            colorCount.at(1)++;
-                            break;
-                        }
-                        case "blue": {
-                            colorCount.at(2)++;
-                            break;
-                        }
-                        case "yellow": {
-                            colorCount.at(3)++;
-                            break;
-                        }
-                    }
+			if(c.getColor() == "red"){
+				colorCount.at(0)++;
+			}
+			else if(c.getColor() == "green"){
+				colorCount.at(1)++;
+			}
+			else if(c.getColor() == "blue"){
+				colorCount.at(2)++;
+			}
+			else if(c.getColor() == "yellow"){
+				colorCount.at(3)++;
+			}
                 }
                 int index = std::distance(colorCount, std::find(colorCount.begin(), colorCount.end(), *(std::max_element(colorCount.begin(), colorCount.end()))));
                 std::string colors[] = {"red", "green", "blue", "yellow"};

@@ -12,6 +12,7 @@ class HumanPlayer : public Player{
         Card play(Card discard) override;
 	void chooseCard();
 	int getCurrentCard();
+	bool checkMovePossible(Card discard);
 
     private:
         void setName();
