@@ -14,14 +14,10 @@ class Game{
         void dealCards();
         Card drawCard();
         Card getDiscard();
-        Player p1; //human player
-        Player p2; //AI
+        Player* p1; //human player
+        Player* p2; //AI
         Deck drawPile;
-
-    private:
-        //Deck drawPile; I don't know why I did this and which draw pile needs to stay but I'll figure it out
-        Deck discardPile;
-
+	Deck discardPile;
 };
 
 #endif

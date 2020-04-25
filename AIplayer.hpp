@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "player.hpp"
 #ifndef AIPLAYER_HPP
 #define AIPLAYER_HPP
@@ -10,3 +10,4 @@ class AIplayer : public Player{
 };
 
 #endif
+*/

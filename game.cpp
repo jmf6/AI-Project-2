@@ -2,8 +2,8 @@
 #include <algorithm>
 #include <iostream>
 Game::Game(){
-    p1 = HumanPlayer();
-    p2 = HumanPlayer();
+    p1 = new HumanPlayer();
+    p2 = new HumanPlayer();
     drawPile = Deck::makeStartingDeck();
     discardPile = Deck();
 
@@ -22,9 +22,9 @@ Game::Game(){
 void Game::dealCards(){
     for(int i = 0; i < 7; i++){
         Card c = drawCard();
-        p2.addToHand(c);
+        p2->addToHand(c);
         c = drawCard();
-        p1.addToHand(c);
+        p1->addToHand(c);
     }
 }
 

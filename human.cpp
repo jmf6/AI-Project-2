@@ -12,23 +12,41 @@ void HumanPlayer::setName(){
     sName(t);
 }
 
-Card HumanPlayer::play(){
-    std::cout << "entering play function" << std::endl;
-
+void HumanPlayer::chooseCard(){
     int card;
-    std::cout << "The current cards in your hand are: " << std::endl;
-
     printCards();
-
     std::cout << "Enter the number of the card you wish to play: ";
     std::cin >> card;
-    Card c = hand.at(card - 1);
-    //check here for valid move using hand.at(card - 1)
+
+    this->currentCard = card;
+}
+
+int HumanPlayer::getCurrentCard(){
+    return currentCard;
+}
+
+Card HumanPlayer::play(Card discard){
+    chooseCard();
+       
+    Card c = hand.at(getCurrentCard());
+
+    if(checkMove(c, discard)){
+	hand.erase(hand.begin() + getCurrentCard());
+    }
+
+    else{
+	do{
+	    std::cout << "Invalid move" << std::endl;
+	    play(discard);
+	}while(!checkMove(c,discard));
+    }
+
 
     return c;
 }
 
 void HumanPlayer::printCards(){
+    std::cout << "The current cards in your hand are: " << std::endl;
     for(int i = 0; i < hand.size(); i++){
         if(hand.at(i).getIsAction() == false){
             std::cout << "Card #" << i + 1 << ": " << hand.at(i).getColor() << " " << hand.at(i).getValue() << std::endl;
