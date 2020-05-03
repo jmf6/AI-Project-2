@@ -3,6 +3,8 @@
 #define RULES_HPP
 #include <functional>
 #include <algorithm>
+#include <iostream>
+#include <iterator>
 #include <vector>
 #include "card.hpp"
 // This struct acts as an organizer for the rules defined for the game. C++14 required for this object.

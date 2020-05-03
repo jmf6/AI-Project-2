@@ -3,7 +3,7 @@
 #include <iostream>
 Game::Game(){
     p1 = new HumanPlayer();
-    p2 = new HumanPlayer();
+    p2 = new AIplayer();
     drawPile = Deck::makeStartingDeck();
     discardPile = Deck();
 

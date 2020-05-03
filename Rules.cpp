@@ -17,6 +17,7 @@ std::vector<Rules::Rule> Rules::rules = {
         },
         act { // if we do, then play the one with the max value
             std::vector<Card> pdeck;
+	    std::cout << "test passed, picking card...\n";
             for(auto c : deck) {
                 if((c.getColor() == discard.getColor() || (c.getValue() == discard.getValue()))) {
                     pdeck.push_back(c);
@@ -29,6 +30,7 @@ std::vector<Rules::Rule> Rules::rules = {
                     max = c;
                 }
             }
+	    std::cout << "max value of card: " << max.getValue() << std::endl;
             if(max.getColor() != "wild") {
                 return max;
             } else {
@@ -47,7 +49,8 @@ std::vector<Rules::Rule> Rules::rules = {
 				colorCount.at(3)++;
 			}
                 }
-                int index = std::distance(colorCount, std::find(colorCount.begin(), colorCount.end(), *(std::max_element(colorCount.begin(), colorCount.end()))));
+		int tmp = *(std::max_element(colorCount.begin(), colorCount.end()));
+                int index = std::distance(colorCount.begin(), std::find(colorCount.begin(), colorCount.end(), tmp));
                 std::string colors[] = {"red", "green", "blue", "yellow"};
                 max.setColor(colors[index]);
             }
