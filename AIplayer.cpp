@@ -17,5 +17,13 @@ Card AIplayer::play(Card discard) {
     if (!checkMove(c, discard))  {
         c = Card::turnOver;
     }
-    return c;
+    Card nc = Card(c); // copy constructor, so we can safely delete it from our deck without worries about dangling pointers or whatever
+    for(size_t i = 0; i < hand.size(); i++) {
+        c = hand.at(i);
+        if(c.equals(nc)) { // we want to remove played cards from the AI's hand
+            hand.erase(hand.begin()+i);
+            break;
+        }
+    }
+    return nc;
 }

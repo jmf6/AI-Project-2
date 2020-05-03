@@ -6,6 +6,7 @@ class Card{
     public:
 	Card(std::string color, int value);
         Card(std::string color, int value, std::string action);
+        Card(const Card& other);
         void setColor(std::string color);
 	void setIsAction(bool isAction);
         void setAction(std::string action);
@@ -15,6 +16,7 @@ class Card{
         int getValue();
 	bool getIsAction();
         static Card turnOver; // This is a special card that indicates the player is finished with their turn and is ready to let the next player go.
+        bool equals(const Card& rhs);
 
     private:
 	std::string color;

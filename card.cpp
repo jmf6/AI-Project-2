@@ -16,6 +16,17 @@ Card::Card(std::string color, int value, std::string action){
 	setAction(action);
 }
 
+Card::Card(const Card& other) {
+	this->color = other.color;
+	this->value = other.value;
+	this->isAction = other.isAction;
+	this->action = other.action;
+}
+
+bool Card::equals(const Card& rhs) {
+	return (color == rhs.color && value == rhs.value && isAction == rhs.isAction && action == rhs.action);
+}
+
 void Card::setColor(std::string color){
 	this->color = color;
 }

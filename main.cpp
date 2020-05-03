@@ -39,9 +39,31 @@ int main(){
                 currentPlayer->addToHand(c);
                 goto flip; // skip to the next player turn
             } else if(c.getColor() == "wild") {
-                
-            }
-            else{
+                // it is a wild colored card, and we need to set the color
+                char selection = 0;
+                do {
+                    std::cout << "Wild card! Please pick a color (r,y,b,g): ";
+                    std::cin >> selection;
+                } while (selection != 'r' || selection != 'y' || selection != 'b' || selection != 'g');
+                switch(selection) {
+                    case 'r': {
+                        c.setColor("red");
+                        break;
+                    }
+                    case 'y': {
+                        c.setColor("yellow");
+                        break;
+                    }
+                    case 'g': {
+                        c.setColor("green");
+                        break;
+                    }
+                    case 'b': {
+                        c.setColor("blue");
+                        break;
+                    }
+                }
+            } else {
                 g.discardPile.theDeck.push_back(c);
                 if(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild"){
                     do{
@@ -49,6 +71,7 @@ int main(){
                         g.discardPile.theDeck.push_back(c);
                         if(currentPlayer->hand.size() == 1){
                             cout << "Uno!!!" << endl;
+                            break;
                         }
                     }while(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild");
                 }
@@ -64,8 +87,10 @@ int main(){
             flip: // here we skip to the next player (gross)
             counter = !counter;
         }
-        choice = 'n';
-    }while(choice != 'n' && choice != 'N');
+        std::cout << currentPlayer->getName() << " won!\nDo you want to play again? (Y/N): ";
+        std::cin >> choice;
+        choice = (choice != 'n' || choice != 'y' || choice != 'N' || choice != 'Y') ? 'n' : choice;
+    } while(choice != 'n' && choice != 'N');
 
     return 0;
 }

@@ -33,6 +33,31 @@ Card HumanPlayer::play(Card discard){
         std::cout << "No move! Drawing a card...\n";
 	    return Card::turnOver;
     }
+    if(discard.getColor() == "wild") { // shouldn't really happen, but edge cases
+        char selection = 0;
+        do {
+            std::cout << "Wild card! Please pick a color (r,y,b,g): ";
+            std::cin >> selection;
+        } while (selection != 'r' || selection != 'y' || selection != 'b' || selection != 'g');
+        switch(selection) {
+            case 'r': {
+                discard.setColor("red");
+                break;
+            }
+            case 'y': {
+                discard.setColor("yellow");
+                break;
+            }
+            case 'g': {
+                discard.setColor("green");
+                break;
+            }
+            case 'b': {
+                discard.setColor("blue");
+                break;
+            }
+        }
+    }
     while(getCurrentCard() - 1 < 0 || getCurrentCard() - 1 > hand.size() - 1){
         std::cout << "Invalid choice" << std::endl;
         chooseCard();
@@ -45,10 +70,8 @@ Card HumanPlayer::play(Card discard){
     }
 
     else{
-        do{
-            std::cout << "Invalid move" << std::endl;
-            play(discard);
-        }while(!checkMove(c,discard));
+        std::cout << "Invalid move; Card is: " << discard.getColor() << " " << discard.getValue() << std::endl;
+        play(discard);
     }
 
     if(c.getColor() == "wild"){
