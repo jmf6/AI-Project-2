@@ -30,6 +30,7 @@ Card HumanPlayer::play(Card discard){
 	    chooseCard();
     }
     else{
+        std::cout << "No move! Drawing a card...\n";
 	    return Card::turnOver;
     }
     while(getCurrentCard() - 1 < 0 || getCurrentCard() - 1 > hand.size() - 1){
@@ -81,14 +82,9 @@ Card HumanPlayer::play(Card discard){
 }
 
 bool HumanPlayer::checkMovePossible(Card discard){
-    for(int i = 0; i < hand.size(); i++){
-        if(discard.getValue() <= 9 && (hand.at(i).getValue() == discard.getValue())){
-            return true;
-        }
-        else if(discard.getIsAction() && (hand.at(i).getAction() == discard.getAction())){
-            return true;
-        }
-        else if(discard.getColor() != "wild" && (hand.at(i).getColor() == discard.getColor())){
+    for(size_t i = 0; i < hand.size(); i++){
+        Card c = hand.at(i);
+        if(checkMove(c, discard)) { 
             return true;
         }
     }
@@ -97,7 +93,7 @@ bool HumanPlayer::checkMovePossible(Card discard){
 
 void HumanPlayer::printCards(){
     std::cout << "The current cards in your hand are: " << std::endl;
-    for(int i = 0; i < hand.size(); i++){
+    for(size_t i = 0; i < hand.size(); i++){
         if(hand.at(i).getIsAction() == false){
             std::cout << "Card #" << i + 1 << ": " << hand.at(i).getColor() << " " << hand.at(i).getValue() << std::endl;
         }

@@ -82,15 +82,11 @@ bool Player::checkDrawFour(Card discard){
 
 bool Player::checkMove(Card move, Card discard){
     if(move.getAction() != "draw4"){
-        if(checkColor(move, discard) || checkValue(move, discard) || checkAction(move, discard)){
-            return true;
-        }
+        return checkColor(move, discard) || checkValue(move, discard) || checkAction(move, discard);
     }
              
     else if(move.getAction() == "draw4"){
-        if(checkDrawFour(discard)){
-                return true;
-        }
+        return checkDrawFour(discard);
     }
     
     return false;

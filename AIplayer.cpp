@@ -5,8 +5,7 @@ AIplayer::AIplayer(){
     sName("CPU 1");
 }
 
-Card AIplayer::play(Card discard){
-    //do AI shit here
+Card AIplayer::play(Card discard) {
 	std::cout << "AI is making move!\n";
     Card c = Card::turnOver;
     for(auto rule : Rules::rules) {
@@ -18,5 +17,5 @@ Card AIplayer::play(Card discard){
     if (!checkMove(c, discard))  {
         c = Card::turnOver;
     }
-    return c; //just until AI shit is done
+    return c;
 }

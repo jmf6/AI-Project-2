@@ -5,94 +5,65 @@
 #include "Rules.hpp"
 #include "human.hpp"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
+
+void sleepForMillis(size_t x) {
+    this_thread::sleep_for(chrono::milliseconds(x));
+}
 
 int main(){
     char choice = 'y';
     Player* currentPlayer;
-    Player* otherPlayer;
-    int counter = 1;
+    bool counter = false;
     bool win = false;
     do{
 
         cout << "Welcome to UNO!" << endl;
         Game g = Game(); //initialize game
-        if(g.getDiscard().getColor() == "wild"){
-            char color;
-            std::string select;
-            std::cout << "Which color would you like to change to? (r = red, b = blue, g = green, y = yellow) ";
-            while(color != 'r' && color != 'b' && color != 'g' && color != 'y'){
-               std::cout << "Invalid choice, r = red, b = blue, g = green, y = yellow";
-            }
-
-            switch(color){
-                case 'r':
-                    select = "red";
-                    break;
-                case 'b':
-                    select = "blue";
-                    break;
-                case 'g':
-                    select = "green";
-                    break;
-                case 'y':
-                        select = "yellow";
-                        break;
-            }
-
-            g.getDiscard().setColor(select);
-        }
 
         while(!win){
-                if(counter == 1){
-                    currentPlayer = g.p1;
-                    otherPlayer = g.p2;
-                }
-                else if(counter == 2){
-                    currentPlayer = g.p2;
-                    otherPlayer = g.p1;
+            if(!counter){
+                currentPlayer = g.p1;
+            }
+            else {
+                currentPlayer = g.p2;
+            }
+            cout << "Top of discard pile: " << g.getDiscard().getColor() << " " << g.getDiscard().getValue() << endl;
+            Card c = currentPlayer->play(g.getDiscard());
+            sleepForMillis(250);
+            if(c.getValue() == -100 && c.getColor() == "red") { // this is our "it's the next player's move" card
+                c = g.drawCard();
+                currentPlayer->addToHand(c);
+                goto flip; // skip to the next player turn
+            } else if(c.getColor() == "wild") {
+                
+            }
+            else{
+                g.discardPile.theDeck.push_back(c);
+                if(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild"){
+                    do{
+                        Card c = currentPlayer->play(g.getDiscard());
+                        g.discardPile.theDeck.push_back(c);
+                        if(currentPlayer->hand.size() == 1){
+                            cout << "Uno!!!" << endl;
+                        }
+                    }while(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild");
                 }
 
-                cout << "Top of discard pile: " << g.getDiscard().getColor() << " " << g.getDiscard().getValue() << endl;
-
-                Card c = currentPlayer->play(g.getDiscard());
-		if(c.getValue() == -100){
-		    c = g.drawCard();
-		    currentPlayer->addToHand(c);
-		}
-		else{
-                    g.discardPile.theDeck.push_back(c);
-                    if(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild"){
-                        do{
-                            Card c = currentPlayer->play(g.getDiscard());
-                            g.discardPile.theDeck.push_back(c);
-                            if(currentPlayer->hand.size() == 1){
-                                cout << "Uno!!!" << endl;
-                            }
-                        }while(g.getDiscard().getIsAction() && g.getDiscard().getAction() != "wild");
-                    }
-
-                    if(currentPlayer->hand.size() == 1){
-                        cout << "Uno!!!" << endl;
-                    }
-
-                    if(currentPlayer->hand.size() == 0){
-                            win = true;
-                    }
-		}
-                if(counter == 1){
-                        counter = 2;
+                if(currentPlayer->hand.size() == 1){
+                    cout << "Uno!!!" << endl;
                 }
-                else if(counter == 2){
-                        counter = 1;
+
+                if(currentPlayer->hand.size() == 0){
+                        win = true;
                 }
+            }
+            flip: // here we skip to the next player (gross)
+            counter = !counter;
         }
-
-
-                //auto mrule = Rules::rules.at(0);
-                //cout << mrule.test() << endl;
-
         choice = 'n';
     }while(choice != 'n' && choice != 'N');
 

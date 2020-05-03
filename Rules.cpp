@@ -7,8 +7,8 @@
 // ADD RULES BELOW
 
 std::vector<Rules::Rule> Rules::rules = {
-    Rules::Rule( // example rule definition
-        tst { // do we have a normal card that we can play? 
+    Rules::Rule( // turns out this one rule is pretty good, and we don't really need more. How about that?
+        tst { // do we have a card that we can play? 
             bool r = false;
             for(auto c : deck) {
                 r = (!r) ? (c.getColor() == discard.getColor() || (c.getValue() == discard.getValue())) : r;
@@ -17,7 +17,7 @@ std::vector<Rules::Rule> Rules::rules = {
         },
         act { // if we do, then play the one with the max value
             std::vector<Card> pdeck;
-	    std::cout << "test passed, picking card...\n";
+	        std::cout << "test passed, picking card...\n";
             for(auto c : deck) {
                 if((c.getColor() == discard.getColor() || (c.getValue() == discard.getValue()))) {
                     pdeck.push_back(c);
@@ -30,26 +30,30 @@ std::vector<Rules::Rule> Rules::rules = {
                     max = c;
                 }
             }
-	    std::cout << "max value of card: " << max.getValue() << std::endl;
+	        std::cout << "max card: " << max.getColor() << " " << max.getValue();
+            if(max.getIsAction()) {
+                std::cout << " " << max.getAction();
+            }
+            std::cout << std::endl;
             if(max.getColor() != "wild") {
                 return max;
             } else {
                 std::array<int, 4> colorCount;
                 for(auto c : deck) {
-			if(c.getColor() == "red"){
-				colorCount.at(0)++;
-			}
-			else if(c.getColor() == "green"){
-				colorCount.at(1)++;
-			}
-			else if(c.getColor() == "blue"){
-				colorCount.at(2)++;
-			}
-			else if(c.getColor() == "yellow"){
-				colorCount.at(3)++;
-			}
+                    if(c.getColor() == "red"){
+                        colorCount.at(0)++;
+                    }
+                    else if(c.getColor() == "green"){
+                        colorCount.at(1)++;
+                    }
+                    else if(c.getColor() == "blue"){
+                        colorCount.at(2)++;
+                    }
+                    else if(c.getColor() == "yellow"){
+                        colorCount.at(3)++;
+                    }
                 }
-		int tmp = *(std::max_element(colorCount.begin(), colorCount.end()));
+		        int tmp = *(std::max_element(colorCount.begin(), colorCount.end()));
                 int index = std::distance(colorCount.begin(), std::find(colorCount.begin(), colorCount.end(), tmp));
                 std::string colors[] = {"red", "green", "blue", "yellow"};
                 max.setColor(colors[index]);
