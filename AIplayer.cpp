@@ -9,7 +9,6 @@ Card AIplayer::play(Card discard) {
 	std::cout << "AI is making move!\n";
     Card c = Card::turnOver;
     for(auto rule : Rules::rules) {
-	std::cout << "looping through rules...\n";
         if(rule.test(discard, hand)) {
             c = rule.action(discard, hand);
         }
